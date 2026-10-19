@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Lab3.Models.Rsvp>
+
+@{
+    ViewData["Title"] = "Registrations";
+}
+
+<h1>Workshop Registrations</h1>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Full Name</th>
+            <th>Workshop</th>
+            <th>Accommodation</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.WorkshopTitle</td>
+                <td>
+                    @(item.NeedsAccommodation ? "Yes" : "No")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>No registrations yet.</p>
+}
+
+<a asp-action="RsvpForm"
+   class="btn btn-primary">
+    Register Another Participant
+</a>
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back to Workshops
+</a>

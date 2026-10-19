@@ -1,0 +1,41 @@
+﻿@model Lab3.Models.Rsvp
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<h1>Registration Confirmed!</h1>
+
+<div class="alert alert-success">
+    <h4>@ViewData["Message"]</h4>
+</div>
+
+<p><strong>Name:</strong> @Model.FullName</p>
+
+<p>
+    <strong>Workshop:</strong>
+    @Model.WorkshopTitle
+</p>
+
+<p>
+    <strong>Needs Accommodation:</strong>
+
+    @if (Model.NeedsAccommodation)
+    {
+        <span>Yes</span>
+    }
+    else
+    {
+        <span>No</span>
+    }
+</p>
+
+<a asp-action="Registrations"
+   class="btn btn-primary">
+    View All Registrations
+</a>
+
+<a asp-action="Index"
+   class="btn btn-secondary">
+    Back to Workshops
+</a>
