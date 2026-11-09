@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Lab3.Models;
-using System.Collections.Generic;
+using Lab3.Data;
 
 namespace Lab3.Controllers
 {
     public class WorkshopsController : Controller
     {
-        private static List<Rsvp> registrations = new List<Rsvp>();
+        private readonly ApplicationDbContext _context;
+
+        public WorkshopsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
@@ -22,8 +28,6 @@ namespace Lab3.Controllers
         [HttpPost]
         public IActionResult Confirm(Rsvp model)
         {
-            registrations.Add(model);
-
             ViewData["Message"] =
                 "Thanks for registering, " + model.FullName + "!";
 
@@ -32,6 +36,7 @@ namespace Lab3.Controllers
 
         public IActionResult Registrations()
         {
+            var registrations = _context.Rsvps.ToList();
             return View(registrations);
         }
     }
